@@ -146,7 +146,6 @@ const updatePlace = async (req, res, next) => {
     const { title, description } = req.body;
     const placeId = req.params.pid;
 
-
     let place;
 
     try {
