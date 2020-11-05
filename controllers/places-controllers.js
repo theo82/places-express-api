@@ -123,41 +123,50 @@ const createPlace = async (req, res, next) => {
 };
 
 const updatePlace = async (req, res, next) => {
-
-
     const errors = validationResult(req);
-
-    if(!errors.isEmpty()) {
-        console.log(errors);
-        return next(
-            new HttpError('Invalid inputs passed, please check your data', 422)
-        );
+    if (!errors.isEmpty()) {
+      return next(
+        new HttpError('Invalid inputs passed, please check your data.', 422)
+      );
     }
-
+  
     const { title, description } = req.body;
     const placeId = req.params.pid;
-
+  
     let place;
-
     try {
-        place = await Place.findById(placeId);
+      place = await Place.findById(placeId);
     } catch (err) {
-        const error = new HttpError('Something went wrong, could not find place.!', 500);
+      const error = new HttpError(
+        'Something went wrong, could not update place.',
+        500
+      );
+      return next(error);
+    }
+  
+    if(place.creator.toString() !== req.userData.userId) {
+        const error = new HttpError(
+            'You are not allowed to edit this place',
+            401
+        );
         return next(error);
     }
 
     place.title = title;
     place.description = description;
-
+  
     try {
-        await place.save();
+      await place.save();
     } catch (err) {
-        const error = new HttpError('Something went wrong, could not update place.!', 500);
-        return next(error);
-    }    
-    res.status(200).json({ place: place.toObject({ getters: true })});
-       
-};
+      const error = new HttpError(
+        'Something went wrong, could not update place.',
+        500
+      );
+      return next(error);
+    }
+  
+    res.status(200).json({ place: place.toObject({ getters: true }) });
+  };
 
 const deletePlace = async (req, res, next) => {
     const placeId = req.params.pid;
