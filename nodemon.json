@@ -1,9 +1,9 @@
 {
     "env": {
-        "DB_USER": "theoaristi53",
-        "DB_PASSWORD": "I2YjAHwxnKfB0Ysq",
+        "DB_USER": "theo81",
+        "DB_PASSWORD": "dcEGpByn7suGfvyV",
         "DB_NAME": "mern",
-        "GOOGLE_API_KEY": "AIzaSyAGkbzNXQd81raEE7JRfUeVdBjzScTFk4w",
+        "GOOGLE_API_KEY": "AIzaSyDXM-3JIWjQG-aY1ovYHd5dlJxq0npn6KQ",
         "JWT_KEY": "supersecret_dont_share"
     }
 }
