@@ -1,7 +1,9 @@
 const { default: Axios } = require("axios");
 const HttpError = require("../models/http-error");
 const axios = require('axios');
-const API_KEY = 'AIzaSyDLruRtPEAMo2FQ8bcTRHEJ5rs3jwqV6uE';
+// const API_KEY = 'AIzaSyDLruRtPEAMo2FQ8bcTRHEJ5rs3jwqV6uE';
+const API_KEY = process.env.GOOGLE_API_KEY;
+
 
 async function getCoordsForAddress(address) {
     const response = 
